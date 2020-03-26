@@ -1,28 +1,73 @@
-<h1>Register</h1>
-
-<%= form_for @changeset, @action, [as: :user], fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
-
-  <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-
-  <%= label f, :password %>
-  <%= password_input f, :password %>
-  <%= error_tag f, :password %>
-
-  <%= label f, :password_confirmation %>
-  <%= password_input f, :password_confirmation %>
-  <%= error_tag f, :password_confirmation %>
-
-  <div>
-    <%= submit "Register" %>
+<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+      Create an account
+    </h2>
+    <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
+      Or <%= link "sign into your account", to: Routes.pow_session_path(@conn, :new), class: "font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150" %>
+    </p>
   </div>
-<% end %>
 
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <%= form_for @changeset, @action, [as: :user], fn f -> %>
+        <%= if @changeset.action do %>
+          <div class="alert alert-danger">
+            <p>Oops, something went wrong! Please check the errors below.</p>
+          </div>
+        <% end %>
 
-<span><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></span>
+        <div>
+          <%= label f, Pow.Ecto.Schema.user_id_field(@changeset), class: "block text-sm font-medium leading-5 text-gray-700" %>
+          <div class="mt-1 rounded-md shadow-sm">
+            <%= email_input f, Pow.Ecto.Schema.user_id_field(@changeset), required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+          </div>
+          <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+        </div>
+
+        <div class="mt-6">
+          <%= label f, :password, class: "block text-sm font-medium leading-5 text-gray-700" %>
+          <div class="mt-1 rounded-md shadow-sm">
+            <%= password_input f, :password, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+          </div>
+          <%= error_tag f, :password %>
+        </div>
+
+        <div class="mt-6">
+          <%= label f, :password_confirmation, class: "block text-sm font-medium leading-5 text-gray-700" %>
+          <div class="mt-1 rounded-md shadow-sm">
+            <%= password_input f, :password_confirmation, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+          </div>
+          <%= error_tag f, :password_confirmation %>
+        </div>
+
+        <div class="mt-6">
+          <span class="block w-full rounded-md shadow-sm">
+            <%= submit "Submit", class: "w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out" %>
+          </span>
+        </div>
+      <% end %>
+
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300"></div>
+          </div>
+          <div class="relative flex justify-center text-sm leading-5">
+            <span class="px-2 bg-white text-gray-500">
+              Or register with
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <span class="w-full inline-flex rounded-md shadow-sm">
+            <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out">
+              <img width="20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/128px-Google_%22G%22_Logo.svg.png" alt="Google logo">
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

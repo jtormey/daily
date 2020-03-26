@@ -27,4 +27,3 @@
     <%= submit "Update" %>
   </div>
 <% end %>
-
