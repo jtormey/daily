@@ -2,6 +2,6 @@ defmodule DailyWeb.PageController do
   use DailyWeb, :controller
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    redirect(conn, to: Routes.pow_registration_path(conn, :new))
   end
 end
