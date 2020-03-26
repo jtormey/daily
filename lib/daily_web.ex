@@ -41,6 +41,7 @@ defmodule DailyWeb do
 
       import DailyWeb.ErrorHelpers
       import DailyWeb.Gettext
+      import DailyWeb.UserViewHelper
       alias DailyWeb.Router.Helpers, as: Routes
     end
   end

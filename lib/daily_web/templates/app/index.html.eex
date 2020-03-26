@@ -1,3 +1,30 @@
- <h1>
-   Hello, <%= @current_user.first_name %>!
- </h1>
+<div class="mt-8 grid sm:grid-cols-3 grid-cols-1 row-gap-6 col-gap-4">
+  <div class="sm:col-span-1">
+    <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-400">
+      <span class="text-sm font-medium leading-none text-white"><%= initials(@current_user) %></span>
+    </span>
+    <span>
+      <%= @current_user.first_name %>
+    </span>
+
+    <ul class="mt-4 bg-white shadow overflow-hidden sm:rounded-md flex flex-col">
+      <%= for {goal, i} <- Enum.with_index(@goals) do %>
+        <li class="<%= if i > 0, do: "border-t border-gray-200" %>">
+          <div class="p-3 flex items-center justify-between">
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <div class="ml-2 text-sm leading-5 font-medium text-gray-600 truncate">
+                <%= goal.name %>
+              </div>
+            </div>
+            <%= if goal.streak > 1 do %>
+              <span class="text-sm">🔥&times; <%= goal.streak %></span>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

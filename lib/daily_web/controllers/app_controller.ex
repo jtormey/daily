@@ -1,7 +1,10 @@
 defmodule DailyWeb.AppController do
   use DailyWeb, :controller
 
+  alias Daily.Goals
+
   def index(conn, _params) do
-    render(conn, "index.html", page_title: "Dashboard")
+    goals = Goals.list_goals()
+    render(conn, "index.html", goals: goals, page_title: "Dashboard")
   end
 end
