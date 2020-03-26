@@ -19,9 +19,9 @@ defmodule Daily.Goals.Goal do
   @doc false
   def changeset(goal, attrs) do
     goal
-    |> cast(attrs, [:name, :description, :period, :streak, :user_id])
-    |> validate_required([:name, :period, :streak])
-    |> validate_inclusion(:period, ["daily"])
-    |> validate_number(:streak, greater_than_or_equal_to: 0)
+    |> cast(attrs, [:name, :description, :user_id])
+    |> validate_required([:name])
+    |> put_change(:period, "daily")
+    |> put_change(:streak, 0)
   end
 end
