@@ -54,9 +54,9 @@
 
         <div class="mt-6">
           <span class="w-full inline-flex rounded-md shadow-sm">
-            <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out">
+            <a href="<%= Routes.pow_assent_authorization_path(@conn, :new, "google") %>" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out">
               <img width="20px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/128px-Google_%22G%22_Logo.svg.png" alt="Google logo">
-            </button>
+            </a>
           </span>
         </div>
       </div>
