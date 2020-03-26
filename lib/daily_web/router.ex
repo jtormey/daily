@@ -1,5 +1,6 @@
 defmodule DailyWeb.Router do
   use DailyWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,14 +14,15 @@ defmodule DailyWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/" do
+    pipe_through :browser
+
+    pow_routes()
+  end
+
   scope "/", DailyWeb do
     pipe_through :browser
 
     get "/", PageController, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", DailyWeb do
-  #   pipe_through :api
-  # end
 end

@@ -42,5 +42,7 @@ defmodule DailyWeb.Endpoint do
     key: "_daily_key",
     signing_salt: "CJfQ9IBj"
 
+  plug Pow.Plug.Session, otp_app: :daily
+
   plug DailyWeb.Router
 end

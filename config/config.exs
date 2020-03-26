@@ -17,6 +17,14 @@ config :daily, DailyWeb.Endpoint,
   render_errors: [view: DailyWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Daily.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :daily, Daily.Repo,
+  migration_primary_key: [name: :id, type: :binary_id],
+  migration_timestamps: [type: :utc_datetime]
+
+config :daily, :pow,
+  user: Daily.Users.User,
+  repo: Daily.Repo
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
