@@ -7,6 +7,7 @@ defmodule Daily.Goals do
   alias Daily.Repo
 
   alias Daily.Goals.Goal
+  alias Daily.Users.User
 
   @doc """
   Returns the list of goals.
@@ -19,6 +20,10 @@ defmodule Daily.Goals do
   """
   def list_goals do
     Repo.all(Goal)
+  end
+
+  def list_goals(%User{id: id}) do
+    Repo.all from g in Goal, where: [user_id: ^id]
   end
 
   @doc """

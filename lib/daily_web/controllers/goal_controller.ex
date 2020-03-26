@@ -5,7 +5,7 @@ defmodule DailyWeb.GoalController do
   alias Daily.Goals.Goal
 
   def index(conn, _params) do
-    goals = Goals.list_goals()
+    goals = Goals.list_goals(conn.assigns.current_user)
     render(conn, "index.html", goals: goals, page_title: "Goals")
   end
 
