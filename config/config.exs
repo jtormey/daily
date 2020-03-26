@@ -23,7 +23,8 @@ config :daily, Daily.Repo,
 
 config :daily, :pow,
   user: Daily.Users.User,
-  repo: Daily.Repo
+  repo: Daily.Repo,
+  web_module: DailyWeb
 
 # Configures Elixir's Logger
 config :logger, :console,
