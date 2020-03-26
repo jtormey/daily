@@ -19,19 +19,14 @@ defmodule DailyWeb.GoalController do
     |> Map.put("user_id", conn.assigns.current_user.id)
     |> Goals.create_goal()
     |> case do
-      {:ok, goal} ->
+      {:ok, _goal} ->
         conn
         |> put_flash(:info, "Goal created successfully.")
-        |> redirect(to: Routes.goal_path(conn, :show, goal))
+        |> redirect(to: Routes.goal_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, page_title: "Create Goal")
     end
-  end
-
-  def show(conn, %{"id" => id}) do
-    goal = Goals.get_goal!(id)
-    render(conn, "show.html", goal: goal, page_title: "View Goal")
   end
 
   def edit(conn, %{"id" => id}) do
@@ -44,10 +39,10 @@ defmodule DailyWeb.GoalController do
     goal = Goals.get_goal!(id)
 
     case Goals.update_goal(goal, goal_params) do
-      {:ok, goal} ->
+      {:ok, _goal} ->
         conn
         |> put_flash(:info, "Goal updated successfully.")
-        |> redirect(to: Routes.goal_path(conn, :show, goal))
+        |> redirect(to: Routes.goal_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", goal: goal, changeset: changeset, page_title: "Edit Goal")
