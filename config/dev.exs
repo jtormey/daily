@@ -66,10 +66,4 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
-# Configure your database
-config :daily, Daily.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "daily_dev",
-  hostname: "localhost",
-  pool_size: 10
+import_config "dev.secret.exs"
