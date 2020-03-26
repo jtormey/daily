@@ -1,0 +1,32 @@
+<h1>Listing Goals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Period</th>
+      <th>Streak</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for goal <- @goals do %>
+    <tr>
+      <td><%= goal.name %></td>
+      <td><%= goal.description %></td>
+      <td><%= goal.period %></td>
+      <td><%= goal.streak %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.goal_path(@conn, :show, goal) %></span>
+        <span><%= link "Edit", to: Routes.goal_path(@conn, :edit, goal) %></span>
+        <span><%= link "Delete", to: Routes.goal_path(@conn, :delete, goal), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Goal", to: Routes.goal_path(@conn, :new) %></span>

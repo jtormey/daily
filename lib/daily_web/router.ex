@@ -50,5 +50,6 @@ defmodule DailyWeb.Router do
     pipe_through [:browser, :protected]
 
     get "/me", AppController, :index
+    resources "/goals", GoalController
   end
 end

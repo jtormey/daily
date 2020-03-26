@@ -14,6 +14,8 @@ defmodule Daily.Users.User do
     field :first_name, :string
     field :last_name, :string
 
+    has_many :goals, Daily.Goals.Goal
+
     timestamps(type: :utc_datetime)
   end
 
