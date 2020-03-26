@@ -1,6 +1,6 @@
-<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<div class="mt-32 flex flex-col justify-center sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
-    <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+    <h2 class="text-center text-3xl leading-9 font-extrabold text-gray-900">
       Create an account
     </h2>
     <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
@@ -9,6 +9,13 @@
   </div>
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <%= if get_flash(@conn, :info) do %>
+    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <% end %>
+    <%= if get_flash(@conn, :error) do %>
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <% end %>
+
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
       <%= form_for @changeset, @action, [as: :user], fn f -> %>
         <%= if @changeset.action do %>
