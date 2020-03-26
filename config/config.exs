@@ -24,6 +24,7 @@ config :daily, Daily.Repo,
 config :daily, :pow,
   user: Daily.Users.User,
   repo: Daily.Repo,
+  routes_backend: DailyWeb.Pow.Routes,
   web_module: DailyWeb
 
 # Configures Elixir's Logger

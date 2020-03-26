@@ -10,6 +10,11 @@ defmodule DailyWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -24,5 +29,11 @@ defmodule DailyWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+  end
+
+  scope "/", DailyWeb do
+    pipe_through [:browser, :protected]
+
+    get "/me", AppController, :index
   end
 end
