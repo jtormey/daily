@@ -1,10 +1,18 @@
 defmodule DailyWeb.AppController do
   use DailyWeb, :controller
 
-  alias Daily.Goals
+  alias Daily.{Users, Goals}
 
   def index(conn, _params) do
-    goals = Goals.list_goal_instances(conn.assigns.current_user, Date.utc_today())
-    render(conn, "index.html", goals: goals, page_title: "Dashboard")
+    user = conn.assigns.current_user
+    today = Date.utc_today()
+
+    goals = Goals.list_goal_instances(user, today)
+
+    contacts = user
+    |> Users.list_contacts()
+    |> Enum.map(fn contact -> {contact, Goals.list_goal_instances(contact, today)} end)
+
+    render(conn, "index.html", goals: goals, contacts: contacts, page_title: "Dashboard")
   end
 end
