@@ -38,3 +38,5 @@
     </ul>
   </div>
 </div>
+
+<%= link "Add Contact", to: Routes.pow_invitation_invitation_path(@conn, :new) %>

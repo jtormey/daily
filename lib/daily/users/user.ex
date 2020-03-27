@@ -17,6 +17,14 @@ defmodule Daily.Users.User do
 
     has_many :goals, Daily.Goals.Goal
 
+    many_to_many :contacts, Daily.Users.User,
+      join_through: Daily.Users.UserContact,
+      join_keys: [user_id: :id, contact_id: :id]
+
+    many_to_many :invited_by_contacts, Daily.Users.User,
+      join_through: Daily.Users.UserContact,
+      join_keys: [contact_id: :id, user_id: :id]
+
     timestamps(type: :utc_datetime)
   end
 
@@ -32,6 +40,12 @@ defmodule Daily.Users.User do
     user_or_changeset
     |> pow_assent_user_identity_changeset(user_identity, attrs, user_id_attrs)
     |> cast(transform_attrs(attrs), [:first_name, :last_name])
+  end
+
+  def invite_changeset(user_or_changeset, invited_by, attrs) do
+    user_or_changeset
+    |> pow_invite_changeset(invited_by, attrs)
+    |> put_assoc(:invited_by_contacts, [invited_by])
   end
 
   def transform_attrs(attrs) do
