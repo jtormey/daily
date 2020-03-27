@@ -1,1 +1,3 @@
+<%= component :header, do: "Edit Goal" %>
+
 <%= render "form.html", Map.put(assigns, :action, Routes.goal_path(@conn, :update, @goal)) %>
