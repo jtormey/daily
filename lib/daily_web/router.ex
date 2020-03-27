@@ -2,6 +2,7 @@ defmodule DailyWeb.Router do
   use DailyWeb, :router
   use Pow.Phoenix.Router
   use PowAssent.Phoenix.Router
+  use Pow.Extension.Phoenix.Router, extensions: [PowInvitation]
 
   if Mix.env == :dev do
     forward "/sent-emails", Bamboo.SentEmailViewerPlug
@@ -41,6 +42,7 @@ defmodule DailyWeb.Router do
     pipe_through :browser
 
     pow_routes()
+    pow_extension_routes()
     pow_assent_routes()
   end
 

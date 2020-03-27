@@ -47,6 +47,16 @@ defmodule DailyWeb do
     end
   end
 
+  def mailer_view do
+    quote do
+      use Phoenix.View,
+        root: "lib/daily_web/templates",
+        namespace: DailyWeb
+
+      use Phoenix.HTML
+    end
+  end
+
   def router do
     quote do
       use Phoenix.Router

@@ -24,7 +24,10 @@ config :daily, Daily.Repo,
 config :daily, :pow,
   user: Daily.Users.User,
   repo: Daily.Repo,
+  extensions: [PowInvitation],
+  controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
   routes_backend: DailyWeb.Pow.Routes,
+  mailer_backend: DailyWeb.Pow.Mailer,
   web_module: DailyWeb
 
 # Configures Elixir's Logger

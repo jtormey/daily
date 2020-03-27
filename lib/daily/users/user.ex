@@ -2,6 +2,7 @@ defmodule Daily.Users.User do
   use Ecto.Schema
   use Pow.Ecto.Schema
   use PowAssent.Ecto.Schema
+  use Pow.Extension.Ecto.Schema, extensions: [PowInvitation]
 
   import Ecto.Changeset
 
@@ -22,6 +23,7 @@ defmodule Daily.Users.User do
   def changeset(user_or_changeset, attrs) do
     user_or_changeset
     |> pow_changeset(attrs)
+    |> pow_extension_changeset(attrs)
     |> cast(attrs, [:first_name, :last_name])
     |> validate_required([:first_name, :last_name])
   end
