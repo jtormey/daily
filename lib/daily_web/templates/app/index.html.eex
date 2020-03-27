@@ -6,12 +6,14 @@
 
 <div class="mt-8 grid sm:grid-cols-3 grid-cols-1 row-gap-6 col-gap-4">
   <div class="sm:col-span-1">
-    <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-400">
-      <span class="text-sm font-medium leading-none text-white"><%= initials(@current_user) %></span>
-    </span>
-    <span>
-      <%= @current_user.first_name %>
-    </span>
+    <div class="flex items-center">
+      <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-400">
+        <span class="text-sm font-medium leading-none text-white"><%= initials(@current_user) %></span>
+      </span>
+      <span class="ml-2 text-xl text-gray-500 font-medium">
+        <%= @current_user.first_name %>
+      </span>
+    </div>
 
     <ul class="mt-4 bg-white shadow overflow-hidden sm:rounded-md flex flex-col">
       <%= for {instance, i} <- Enum.with_index(@goals) do %>
