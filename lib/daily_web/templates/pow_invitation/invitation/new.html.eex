@@ -1,18 +1,27 @@
-<h1>Invite</h1>
+<%= component :header, do: "Send Invitation" %>
 
-<%= form_for @changeset, @action, [as: :user], fn f -> %>
+<%= form_for @changeset, @action, [class: "mt-4"], fn f -> %>
   <%= if @changeset.action do %>
-    <div class="alert alert-danger">
+    <div class="alert alert-danger w-1/2">
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
 
-  <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+  <div class="mt-4 grid grid-cols-1 col-gap-4 sm:grid-cols-3">
+    <div class="sm:col-span-2 grid grid-cols-1 row-gap-6 col-gap-4 sm:grid-cols-3">
+      <div class="sm:col-span-2">
+        <%= label f, Pow.Ecto.Schema.user_id_field(@changeset), class: "block text-sm font-medium leading-5 text-gray-700" %>
+        <div class="mt-1 flex rounded-md shadow-sm">
+          <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), class: "flex-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+        </div>
+        <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+      </div>
 
-  <div>
-    <%= submit "Submit" %>
+      <div class="sm:col-span-2">
+        <%= submit "Submit", class: "sm:w-auto w-full sm:inline-block block py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out" %>
+
+        <%= link "Back", to: Routes.app_path(@conn, :index), class: "sm:ml-2 sm:mt-0 mt-2 sm:w-auto w-full sm:inline-flex flex justify-center py-2 px-4 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out" %>
+      </div>
+    </div>
   </div>
 <% end %>
-
