@@ -36,6 +36,12 @@ defmodule Daily.Users.User do
     |> validate_required([:first_name, :last_name])
   end
 
+  def profile_changeset(user_or_changeset, attrs) do
+    user_or_changeset
+    |> cast(attrs, [:email, :first_name, :last_name])
+    |> validate_required([:email, :first_name, :last_name])
+  end
+
   def user_identity_changeset(user_or_changeset, user_identity, attrs, user_id_attrs) do
     user_or_changeset
     |> pow_assent_user_identity_changeset(user_identity, attrs, user_id_attrs)

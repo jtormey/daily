@@ -10,7 +10,7 @@ defmodule DailyWeb.ProfileController do
 
   def update(conn, %{"profile" => profile}) do
     conn.assigns.current_user
-    |> User.changeset(profile)
+    |> User.profile_changeset(profile)
     |> Daily.Repo.update()
     |> case do
       {:ok, _user} ->

@@ -1,5 +1,9 @@
 <%= component :header, do: "Dashboard" %>
 
+<div class="mt-6 sm:w-1/2">
+  <%= component :flashes, @conn %>
+</div>
+
 <div class="mt-8 grid sm:grid-cols-3 grid-cols-1 row-gap-6 col-gap-4">
   <div class="sm:col-span-1">
     <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-400">
