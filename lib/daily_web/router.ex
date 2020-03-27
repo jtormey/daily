@@ -55,8 +55,9 @@ defmodule DailyWeb.Router do
   scope "/", DailyWeb do
     pipe_through [:browser, :protected]
 
-    get "/me", AppController, :index
+    get "/dashboard", AppController, :index
     resources "/goals", GoalController
     post "/goal-instances/:id/complete", GoalInstanceController, :complete
+    resources "/profile", ProfileController, only: [:edit, :update], singleton: true
   end
 end

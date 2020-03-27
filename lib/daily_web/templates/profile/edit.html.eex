@@ -1,0 +1,73 @@
+<%= component :header, do: "Your Profile" %>
+
+<div class="sm:w-2/3 w-full">
+  <%= form_for @changeset, Routes.profile_path(@conn, :update), [as: :profile, class: ""], fn f -> %>
+    <div class="mt-8 pt-8 sm:mt-5 sm:pt-10">
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Personal Information
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+          General details for your profile.
+        </p>
+      </div>
+
+      <div class="mt-6 sm:mt-5">
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= label f, Pow.Ecto.Schema.user_id_field(@changeset), class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-xs rounded-md shadow-sm">
+              <%= email_input f, Pow.Ecto.Schema.user_id_field(@changeset), class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", required: true %>
+            </div>
+          </div>
+          <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+        </div>
+
+        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= label f, :first_name, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-xs rounded-md shadow-sm">
+              <%= text_input f, :first_name, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", required: true %>
+            </div>
+          </div>
+          <%= error_tag f, :first_name %>
+        </div>
+
+        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <%= label f, :last_name, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-xs rounded-md shadow-sm">
+              <%= text_input f, :last_name, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", required: true %>
+            </div>
+          </div>
+          <%= error_tag f, :last_name %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 border-t border-gray-200 pt-5">
+      <div class="sm:col-span-2">
+        <%= submit "Save", class: "sm:w-auto w-full sm:inline-block block py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out" %>
+
+        <%= link "Cancel", to: Routes.app_path(@conn, :index), class: "sm:ml-2 sm:mt-0 mt-2 sm:w-auto w-full sm:inline-flex flex justify-center py-2 px-4 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="mt-8 pt-8 sm:mt-5 sm:pt-10">
+    <div>
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+        Security
+      </h3>
+      <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+        Everything related to protecting your account.
+      </p>
+    </div>
+
+    <div class="mt-6 sm:mt-5">
+      <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+        <%= link "Change password", to: Routes.pow_registration_path(@conn, :edit), class: "sm:w-auto w-full sm:inline-flex flex justify-center py-2 px-4 border border-blue-300 rounded-md bg-white text-sm leading-5 font-medium text-blue-500 hover:text-blue-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out" %>
+      </div>
+    </div>
+  </div>
+</div>
