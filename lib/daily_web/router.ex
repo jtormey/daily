@@ -51,5 +51,6 @@ defmodule DailyWeb.Router do
 
     get "/me", AppController, :index
     resources "/goals", GoalController
+    post "/goal-instances/:id/complete", GoalInstanceController, :complete
   end
 end

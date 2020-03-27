@@ -9,7 +9,8 @@ defmodule Daily.Goals.GoalInstance do
     field :completed, :boolean, default: false
     field :completed_at, :utc_datetime
     field :for_date, :date
-    field :goal_id, :id
+
+    belongs_to :goal, Daily.Goals.Goal
 
     timestamps(type: :utc_datetime)
   end

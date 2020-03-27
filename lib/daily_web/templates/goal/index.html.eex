@@ -15,9 +15,15 @@
         <div class="px-4 py-4 flex items-center sm:px-6">
           <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
             <div class="flex">
-              <svg class="flex-shrink-0 h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
+              <%= if goal_completed_today?(goal) do %>
+                <svg class="flex-shrink-0 h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+              <% else %>
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+              <% end %>
               <div class="ml-5">
                 <div class="text-sm leading-5 font-medium text-gray-600 truncate">
                   <%= goal.name %>
@@ -39,13 +45,13 @@
                 <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
                 </svg>
-                <span class="ml-2">S</span>
-                <span class="ml-2 text-green-400">M</span>
-                <span class="ml-2">T</span>
-                <span class="ml-2 text-green-400">W</span>
-                <span class="ml-2">R</span>
-                <span class="ml-2">F</span>
-                <span class="ml-2">S</span>
+                <%= for {completed, day_of_week} <- assemble_calendar(goal, for_date: @today) do %>
+                  <%= if completed do %>
+                    <span class="ml-2 text-green-400"><%= day_of_week %></span>
+                  <% else %>
+                    <span class="ml-2"><%= day_of_week %></span>
+                  <% end %>
+                <% end %>
               </div>
             </div>
             <!-- <span><%= link "Delete", to: Routes.goal_path(@conn, :delete, goal), method: :delete, data: [confirm: "Are you sure?"] %></span> -->

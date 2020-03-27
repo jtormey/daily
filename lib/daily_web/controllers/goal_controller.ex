@@ -5,8 +5,9 @@ defmodule DailyWeb.GoalController do
   alias Daily.Goals.Goal
 
   def index(conn, _params) do
-    goals = Goals.list_goals(conn.assigns.current_user)
-    render(conn, "index.html", goals: goals, page_title: "Goals")
+    today = Date.utc_today()
+    goals = Goals.list_goals(conn.assigns.current_user, with_calendar: today)
+    render(conn, "index.html", goals: goals, today: today, page_title: "Goals")
   end
 
   def new(conn, _params) do
@@ -19,7 +20,8 @@ defmodule DailyWeb.GoalController do
     |> Map.put("user_id", conn.assigns.current_user.id)
     |> Goals.create_goal()
     |> case do
-      {:ok, _goal} ->
+      {:ok, goal} ->
+        Goals.create_goal_instance(goal, for_date: Date.utc_today())
         conn
         |> put_flash(:info, "Goal created successfully.")
         |> redirect(to: Routes.goal_path(conn, :index))

@@ -12,6 +12,7 @@ defmodule Daily.Goals.Goal do
     field :streak, :integer, default: 0
 
     belongs_to :user, Daily.Users.User
+    has_many :goal_instances, Daily.Goals.GoalInstance
 
     timestamps(type: :utc_datetime)
   end
