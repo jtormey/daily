@@ -11,7 +11,7 @@
         <span class="text-sm font-medium leading-none text-white"><%= initials(@current_user) %></span>
       </span>
       <span class="ml-2 text-xl text-gray-500 font-medium">
-        <%= @current_user.first_name %>
+        <%= first_name(@current_user) %>
       </span>
     </div>
 
@@ -67,13 +67,13 @@
           <span class="text-sm font-medium leading-none text-white"><%= initials(contact) %></span>
         </span>
         <span class="ml-2 text-xl text-gray-500 font-medium">
-          <%= contact.first_name %>
+          <%= first_name(contact) %>
         </span>
       </div>
 
       <%= if length(goals) == 0 do %>
         <div class="mt-4 text-gray-500">
-          <%= contact.first_name %> hasn't made any goals yet!
+          <%= first_name(contact) %> hasn't made any goals yet!
         </div>
       <% end %>
 

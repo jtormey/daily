@@ -71,7 +71,7 @@
                 </span>
               </div>
               <div class="ml-3">
-                <div class="text-base font-medium leading-6 text-gray-800"><%= full_name(nil) %></div>
+                <div class="text-base font-medium leading-6 text-gray-800"><%= full_name(@current_user) %></div>
                 <div class="text-sm font-medium leading-5 text-gray-500"><%= @current_user.email %></div>
               </div>
             </div>
