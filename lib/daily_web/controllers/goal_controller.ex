@@ -32,8 +32,6 @@ defmodule DailyWeb.GoalController do
   end
 
   def edit(conn, %{"id" => id}) do
-    DailyWeb.Email.welcome_email(to: "jrtormey@gmail.com")
-    |> Daily.Mailer.deliver_now()
     goal = Goals.get_goal!(id)
     changeset = Goals.change_goal(goal)
     render(conn, "edit.html", goal: goal, changeset: changeset, page_title: "Edit Goal")
