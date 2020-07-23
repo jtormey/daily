@@ -84,7 +84,7 @@
         <% end %>
       </nav>
 
-      <div class="py-10">
+      <div class="py-5 sm:py-10">
         <main>
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <%= render @view_module, @view_template, assigns %>

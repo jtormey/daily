@@ -107,7 +107,7 @@
 
   <%= if length(@contacts) == 0 do %>
     <div class="sm:col-span-1">
-      <div class="border-4 border-dashed border-gray-200 rounded-lg h-96 flex items-center justify-center">
+      <div class="border-4 border-dashed border-gray-200 rounded-lg h-64 sm:h-96 flex items-center justify-center">
         <div class="sm:w-2/3 sm:px-0 px-4 flex flex-col">
           <span class="mb-4 text-lg text-gray-400 text-center">
             You don't have anyone to keep accountable yet!
