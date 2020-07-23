@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "Stopping app..."
 
-# ./_build/prod/rel/linear/bin/linear stop
+./_build/prod/rel/daily/bin/daily stop
 
 echo "Getting dependencies..."
 
@@ -19,4 +19,4 @@ MIX_ENV=prod mix release --overwrite
 
 echo "Starting app..."
 
-# ./_build/prod/rel/linear/bin/linear daemon
+./_build/prod/rel/daily/bin/daily daemon
