@@ -27,20 +27,14 @@ defmodule Daily.Goals do
   end
 
   def list_goals(%User{id: id}, with_calendar: date) do
-    preloader = fn goal_ids ->
-      Enum.flat_map goal_ids, fn goal_id ->
-        Repo.all from i in GoalInstance,
-          join: g in Goal, on: [id: i.goal_id],
-          where: g.id == ^goal_id and i.for_date <= ^date,
-          order_by: [desc: :for_date],
-          limit: 7,
-          select: {g.id, i}
-      end
-    end
+    goal_instances_query = from i in GoalInstance,
+      where: i.for_date <= ^date,
+      order_by: {:desc, :for_date},
+      limit: 7
 
     Repo.all from g in Goal,
       where: [user_id: ^id],
-      preload: [goal_instances: ^preloader]
+      preload: [goal_instances: ^goal_instances_query]
   end
 
   def list_goal_instances(%User{id: id}, date) do
@@ -94,12 +88,18 @@ defmodule Daily.Goals do
     |> Repo.insert()
   end
 
-  # TODO: Set up streaming pipeline for this?
-  # TODO: Call every day, for next 2 days or so
+  def create_goal_instances_spanning(days: days) do
+    today = Date.utc_today()
+    Enum.flat_map 0..days, fn d ->
+      create_goal_instance(for_date: Date.add(today, d))
+    end
+  end
+
   def create_goal_instance(for_date: date) do
     Enum.map list_goals(), &create_goal_instance(&1, for_date: date)
   end
 
+  # TODO: This contains a race condition, should enforce constraint in db
   def create_goal_instance(goal = %Goal{}, for_date: date) do
     case get_goal_instance(goal, for_date: date) do
       nil ->

@@ -10,6 +10,7 @@ defmodule Daily.Application do
     children = [
       # Start the Ecto repository
       Daily.Repo,
+      Daily.GoalClock,
       # Start the endpoint when the application starts
       DailyWeb.Endpoint
       # Starts a worker by calling: Daily.Worker.start_link(arg)
